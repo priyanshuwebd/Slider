@@ -1,21 +1,20 @@
-import React, { useState } from 'react'
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
-import { FaQuoteRight } from "react-icons/fa"
-import data from "./data"
-import "./App.css"
+import React, { useState } from 'react';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { FaQuoteRight } from "react-icons/fa";
+import data from "./data";
+import "./App.css";
 
 const App = () => {
-  const [people, setPeople] = useState(data)
-  const [index, setIndex] = useState(0)  // Set initial index to 0
+  const [index, setIndex] = useState(0);  // State for the current index
 
   // Function to handle next button click
   const nextPerson = () => {
-    setIndex((prevIndex) => (prevIndex + 1) % people.length); // Loop back to the start
+    setIndex((prevIndex) => (prevIndex + 1) % data.length); // Loop back to the start
   };
 
   // Function to handle prev button click
   const prevPerson = () => {
-    setIndex((prevIndex) => (prevIndex - 1 + people.length) % people.length); // Loop back to the end
+    setIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length); // Loop back to the end
   };
 
   return (
@@ -26,14 +25,14 @@ const App = () => {
         </h2>
       </div>
       <div className='section-center'>
-        {people.map((person, personIndex) => {
+        {data.map((person, personIndex) => {
           const { id, image, name, title, quote } = person;
 
           let position = "nextSlide";
           if (personIndex === index) {
             position = 'activeSlide';
           }
-          if (personIndex === index - 1 || (index === 0 && personIndex === people.length - 1)) {
+          if (personIndex === index - 1 || (index === 0 && personIndex === data.length - 1)) {
             position = 'lastSlide';
           }
 
@@ -54,10 +53,9 @@ const App = () => {
         <button className='next' onClick={nextPerson}>
           <FiChevronRight />
         </button>
-
       </div>
     </section>
-  )
+  );
 }
 
-export default App
+export default App;
